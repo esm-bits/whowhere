@@ -2,5 +2,5 @@
   (:require [whowhere.entry-points]))
 
 (defn ^:export start []
-  (+ 1 1))
+  (+ 1 2))
 

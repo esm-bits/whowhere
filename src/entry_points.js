@@ -1,4 +1,9 @@
-function onOpen(e) {
-  whowhere.core.start();
+function doGet() {
+  // whowhere.core.start();
+  return HtmlService.createTemplateFromFile("hello").evaluate();
+}
+
+function calc() {
+  return whowhere.core.start();
 }
 
