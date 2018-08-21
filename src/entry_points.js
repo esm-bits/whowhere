@@ -1,6 +1,5 @@
 function doGet() {
-  // whowhere.core.start();
-  return HtmlService.createTemplateFromFile("hello").evaluate();
+  return whowhere.core.index();
 }
 
 function calc() {

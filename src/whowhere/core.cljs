@@ -12,3 +12,8 @@
 (defn ^:export start []
   (members))
 
+(defn ^:export index []
+  (.. js/HtmlService
+    (createTemplateFromFile "index")
+    evaluate))
+
