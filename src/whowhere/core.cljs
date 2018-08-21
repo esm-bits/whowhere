@@ -3,7 +3,8 @@
 
 (defn members []
   (->> (.. js/SpreadsheetApp
-      getActiveSheet
+      getActiveSpreadsheet
+      (getSheetByName "members")
       getDataRange
       getValues)
     array-seq
