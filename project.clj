@@ -1,9 +1,13 @@
 (defproject whowhere "0.1.0-SNAPSHOT"
 
-  :dependencies [[org.clojure/clojure "1.9.0-alpha13"]
-    [org.clojure/clojurescript "1.9.229"]]
+  :dependencies [
+    [org.clojure/clojure "1.9.0-alpha13"]
+    [org.clojure/clojurescript "1.9.229"]
+    [hiccup "1.0.5"]]
 
-  :plugins [[lein-cljsbuild "1.1.4"]]
+  :plugins [
+    [lein-cljsbuild "1.1.4"]
+    [lein-exec "0.3.1"]]
 
   :clean-targets ^{:protect false} [:target-path :compile-path "target" "dist"]
 
