@@ -3,7 +3,8 @@
   :dependencies [
     [org.clojure/clojure "1.9.0-alpha13"]
     [org.clojure/clojurescript "1.9.229"]
-    [hiccup "1.0.5"]]
+    [hiccup "1.0.5"]
+    [garden "1.3.6"]]
 
   :plugins [
     [lein-cljsbuild "1.1.4"]

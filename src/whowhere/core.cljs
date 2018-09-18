@@ -19,15 +19,15 @@
 
 (defn project-names [members]
   (->> members
-   (reduce (fn [accum, member] (concat accum (:projects member))) [])
-   (distinct)
-   (sort)))
+    (reduce (fn [accum, member] (concat accum (:projects member))) [])
+    (distinct)
+    (sort)))
 
 (defn location-names [members]
   (->> members
-   (map #(:location %))
-   (distinct)
-   (sort)))
+    (map #(:location %))
+    (distinct)
+    (sort)))
 
 (defn detect-members [members project-name]
   (reduce (fn [accum member] (if (some (partial = project-name) (:projects member)) (cons member accum) accum)) [] members))
@@ -42,7 +42,8 @@
 (defn ^:export start []
   (->> (raw-members)
     (to-members)
-    (projects)))
+    (projects)
+    (clj->js)))
 
 (defn ^:export index []
   (.. js/HtmlService
