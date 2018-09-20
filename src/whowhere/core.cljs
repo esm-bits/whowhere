@@ -34,10 +34,10 @@
 
 (defn projects [members]
   (let [project-names (project-names members)] 
-      (->> project-names
-        (map (fn [project-name] [project-name (detect-members members project-name)]))
-        (map (fn [[project-name members]] [project-name (location-names members) members]))
-        (map #(apply ->Project %)))))
+    (->> project-names
+      (map (fn [project-name] [project-name (detect-members members project-name)]))
+      (map (fn [[project-name members]] [project-name (location-names members) members]))
+      (map #(apply ->Project %)))))
 
 (defn ^:export start []
   (->> (raw-members)
