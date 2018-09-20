@@ -15,7 +15,7 @@
 
 (defn to-members [raw-members]
   (->> raw-members
-    (map #(Member. (nth % 0) (nth % 1) (js->clj (.split (nth % 2) #",[\s]+")) (nth % 3)))))
+    (map #(Member. (nth % 0) (nth % 1) (js->clj (.split (nth % 2) #",[\s]*")) (nth % 3)))))
 
 (defn project-names [members]
   (->> members
