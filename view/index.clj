@@ -8,6 +8,10 @@
 
 (def styles 
   (css
+    [:body {
+      :font-family "Arial, Verdana, sans-serif"
+      :color "#666"
+    }]
     [:p {
       :margin "1px"
     }]
@@ -19,26 +23,22 @@
     }]
     [:.project {
       :border "solid"
-      :border-color "#999"
+      :border-color "#999 !important"
       :border-radius "40px"
-      :border-width "1px"
+      :border-width "4px !important"
       :float "left"
-      :height "180px"
+      :min-height "120px"
       :margin "1px 2px"
-      :padding "0px 15px"
+      :padding "10px 15px"
       :text-align "center"
       :width "fit-content"
-      :background-color "#def"
     }]
     [:.member {
       :font-size "12px"
-      :border "solid"
-      :border-width "1px"
-      :border-color "#999"
       :margin "1px 2px"
       :border-radius "5px"
       :float "left"
-      :width "100px"
+      :min-width "100px"
     }]
     [:.icon {
       :width "50px"
@@ -49,6 +49,9 @@
     }]
     [:.force_visible {
       :display "block !important"
+    }]
+    [:.loading {
+      :color "#aaa"
     }]
   ))
 
@@ -61,8 +64,9 @@
         [:base {:target "_top"}]]
         [:style styles]
       [:body
+        [:h1 "ITSだれどこ"]
         [:div {:id "visible"}
-          [:i {:class "fa fa-spinner fa-pulse fa-3x fa-fw" "v-bind:class" "{unvisible: active}"}]
+          [:i {:class "loading fa fa-spinner fa-pulse fa-3x fa-fw" "v-bind:class" "{unvisible: active}"}]
           [:div {:class "unvisible" "v-bind:class" "{force_visible: active}"} 
             [:div {:id "projects"}
               [:div {:v-for "project in projects" :class "project"}
