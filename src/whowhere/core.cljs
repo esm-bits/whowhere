@@ -8,7 +8,8 @@
       getDataRange
       getValues)
     array-seq
-    (map array-seq)))
+    (map array-seq)
+    (rest)))
 
 (def settings
   (->> (.. js/SpreadsheetApp
@@ -18,6 +19,7 @@
       getValues)
     array-seq
     (map array-seq)
+    (rest)
     (reduce (fn [accum [key val]] (assoc accum key val)) {})))
 
 (defrecord Member [name, location, projects, icon])
