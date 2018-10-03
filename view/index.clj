@@ -40,6 +40,7 @@
       :border-radius "5px"
       :float "left"
       :min-width "100px"
+      :position "relative"
     }]
     [:.icon {
       :width "50px"
@@ -50,6 +51,26 @@
     }]
     [:.force_visible {
       :display "block !important"
+    }]
+    [:.mask {
+      :width "100%"
+      :height "100%"
+      :position "absolute"
+      :top "0"
+      :left "0"
+      :opacity "0"
+      :background-color "rgba(0,0,0,0.4)"
+      "-webkit-transition" "all 0.2s ease"
+      :transition "all 0.2s ease"
+    }]
+    [".member:hover .mask" {
+	    :opacity "1"
+    }]
+    [".member .caption" {
+	    :font-size "130%"
+	    :text-align "center"
+	    :padding-top "30px"
+	    :color "#fff"
     }]
     [:.loading {
       :color "#aaa"
@@ -75,8 +96,11 @@
                 [:ul
                   [:li {:v-for "member in project['members']" :class "member"}
                     [:p "{{ member['name'] }}"]
-                    [:img {"v-bind:src" "member['icon']" :class "icon"}
-                    [:p "{{ member['location'] }}"]]]]]]]]
+                    [:img {"v-bind:src" "member['icon']" :class "icon"}]
+                    [:div {:class "mask"}
+                      [:div {:class "caption"}
+                        "{{ member['real-name'] }}"]]
+                    [:p "{{ member['location'] }}"]]]]]]]
         [:script "
           google.script.run.withSuccessHandler(initializeVue).start();
           function initializeVue(serverResults) {
