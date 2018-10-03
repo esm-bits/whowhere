@@ -22,6 +22,7 @@
       :list-style "none"
     }]
     [:.project {
+      :background "#ffffee"
       :border "solid"
       :border-color "#999 !important"
       :border-radius "40px"
@@ -77,7 +78,7 @@
                     [:img {"v-bind:src" "member['icon']" :class "icon"}
                     [:p "{{ member['location'] }}"]]]]]]]]
         [:script "
-          google.script.run.withSuccessHandler(initializeVue).calc();
+          google.script.run.withSuccessHandler(initializeVue).jsProjects();
           function initializeVue(projects) {
             new Vue({
               el: '#projects',
