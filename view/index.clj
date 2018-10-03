@@ -28,7 +28,7 @@
       :border-radius "40px"
       :border-width "4px !important"
       :float "left"
-      :min-height "120px"
+      :height "140px"
       :margin "1px 2px"
       :padding "10px 15px"
       :text-align "center"
@@ -59,9 +59,10 @@
       :top "0"
       :left "0"
       :opacity "0"
-      :background-color "rgba(0,0,0,0.4)"
+      :background-color "rgba(0,100,200,0.4)"
       "-webkit-transition" "all 0.2s ease"
       :transition "all 0.2s ease"
+      :border-radius "10px"
     }]
     [".member:hover .mask" {
 	    :opacity "1"
