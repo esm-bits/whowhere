@@ -10,7 +10,7 @@
     array-seq
     (map array-seq)))
 
-(defn settings []
+(def settings
   (->> (.. js/SpreadsheetApp
       getActiveSpreadsheet
       (getSheetByName "settings")
@@ -18,7 +18,7 @@
       getValues)
     array-seq
     (map array-seq)
-    (reduce (fn [accum [key val]] (assoc accum key val)))))
+    (reduce (fn [accum [key val]] (assoc accum key val)) {})))
 
 (defrecord Member [name, location, projects, icon])
 (defrecord Project [name, location, members])
@@ -49,11 +49,17 @@
       (map (fn [[project-name members]] [project-name (location-names members) members]))
       (map #(apply ->Project %)))))
 
-(defn ^:export getProjects []
+(def project-list
   (->> (raw-members)
     (to-members)
-    (projects)
-    (clj->js)))
+    (projects)))
+
+(defn ^:export start []
+  (clj->js
+    {
+      "projects" project-list
+      "settings" (clj->js settings)
+    }))
 
 (defn ^:export index []
   (.. js/HtmlService

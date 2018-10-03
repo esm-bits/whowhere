@@ -65,11 +65,11 @@
         [:base {:target "_top"}]]
         [:style styles]
       [:body
-        [:h1 "ITSだれどこ"]
         [:div {:id "visible"}
           [:i {:class "loading fa fa-spinner fa-pulse fa-3x fa-fw" "v-bind:class" "{unvisible: active}"}]
           [:div {:class "unvisible" "v-bind:class" "{force_visible: active}"} 
             [:div {:id "projects"}
+              [:h1 "{{ settings['title'] }}"]
               [:div {:v-for "project in projects" :class "project"}
                 [:p "{{ project['name'] }}"]
                 [:ul
@@ -78,12 +78,13 @@
                     [:img {"v-bind:src" "member['icon']" :class "icon"}
                     [:p "{{ member['location'] }}"]]]]]]]]
         [:script "
-          google.script.run.withSuccessHandler(initializeVue).jsProjects();
-          function initializeVue(projects) {
+          google.script.run.withSuccessHandler(initializeVue).start();
+          function initializeVue(serverResults) {
             new Vue({
               el: '#projects',
               data: {
-                projects: projects
+                projects: serverResults['projects'],
+                settings: serverResults['settings']
               }})
             new Vue({
               el: '#visible',
