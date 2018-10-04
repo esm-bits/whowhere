@@ -8,14 +8,26 @@
       getDataRange
       getValues)
     array-seq
-    (map array-seq)))
+    (map array-seq)
+    (rest)))
 
-(defrecord Member [name, location, projects, icon])
+(def settings
+  (->> (.. js/SpreadsheetApp
+      getActiveSpreadsheet
+      (getSheetByName "settings")
+      getDataRange
+      getValues)
+    array-seq
+    (map array-seq)
+    (rest)
+    (reduce (fn [accum [key val]] (assoc accum key val)) {})))
+
+(defrecord Member [id, name, real-name, location, projects, icon])
 (defrecord Project [name, location, members])
 
 (defn to-members [raw-members]
   (->> raw-members
-    (map #(Member. (nth % 0) (nth % 1) (js->clj (.split (nth % 2) #",[\s]*")) (nth % 3)))))
+    (map #(Member. (nth % 0) (nth % 1) (nth % 2) (nth % 3) (js->clj (.split (nth % 4) #",[\s]*")) (nth % 5)))))
 
 (defn project-names [members]
   (->> members
@@ -39,11 +51,17 @@
       (map (fn [[project-name members]] [project-name (location-names members) members]))
       (map #(apply ->Project %)))))
 
-(defn ^:export start []
+(def project-list
   (->> (raw-members)
     (to-members)
-    (projects)
-    (clj->js)))
+    (projects)))
+
+(defn ^:export start []
+  (clj->js
+    {
+      "projects" project-list
+      "settings" (clj->js settings)
+    }))
 
 (defn ^:export index []
   (.. js/HtmlService

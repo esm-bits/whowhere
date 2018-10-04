@@ -1,5 +1,6 @@
 dist/
 target/
 resources/
+.clasp/
 .clasp.json
 .lein-repl-history

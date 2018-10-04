@@ -22,12 +22,13 @@
       :list-style "none"
     }]
     [:.project {
+      :background "#ffffee"
       :border "solid"
       :border-color "#999 !important"
       :border-radius "40px"
       :border-width "4px !important"
       :float "left"
-      :min-height "120px"
+      :height "140px"
       :margin "1px 2px"
       :padding "10px 15px"
       :text-align "center"
@@ -39,6 +40,7 @@
       :border-radius "5px"
       :float "left"
       :min-width "100px"
+      :position "relative"
     }]
     [:.icon {
       :width "50px"
@@ -49,6 +51,27 @@
     }]
     [:.force_visible {
       :display "block !important"
+    }]
+    [:.mask {
+      :width "100%"
+      :height "100%"
+      :position "absolute"
+      :top "0"
+      :left "0"
+      :opacity "0"
+      :background-color "rgba(0,100,200,0.4)"
+      "-webkit-transition" "all 0.2s ease"
+      :transition "all 0.2s ease"
+      :border-radius "10px"
+    }]
+    [".member:hover .mask" {
+	    :opacity "1"
+    }]
+    [".member .caption" {
+	    :font-size "130%"
+	    :text-align "center"
+	    :padding-top "30px"
+	    :color "#fff"
     }]
     [:.loading {
       :color "#aaa"
@@ -64,25 +87,29 @@
         [:base {:target "_top"}]]
         [:style styles]
       [:body
-        [:h1 "ITSだれどこ"]
         [:div {:id "visible"}
           [:i {:class "loading fa fa-spinner fa-pulse fa-3x fa-fw" "v-bind:class" "{unvisible: active}"}]
           [:div {:class "unvisible" "v-bind:class" "{force_visible: active}"} 
             [:div {:id "projects"}
+              [:h1 "{{ settings['title'] }}"]
               [:div {:v-for "project in projects" :class "project"}
                 [:p "{{ project['name'] }}"]
                 [:ul
                   [:li {:v-for "member in project['members']" :class "member"}
                     [:p "{{ member['name'] }}"]
-                    [:img {"v-bind:src" "member['icon']" :class "icon"}
-                    [:p "{{ member['location'] }}"]]]]]]]]
+                    [:img {"v-bind:src" "member['icon']" :class "icon"}]
+                    [:div {:class "mask"}
+                      [:div {:class "caption"}
+                        "{{ member['real-name'] }}"]]
+                    [:p "{{ member['location'] }}"]]]]]]]
         [:script "
-          google.script.run.withSuccessHandler(initializeVue).calc();
-          function initializeVue(projects) {
+          google.script.run.withSuccessHandler(initializeVue).start();
+          function initializeVue(serverResults) {
             new Vue({
               el: '#projects',
               data: {
-                projects: projects
+                projects: serverResults['projects'],
+                settings: serverResults['settings']
               }})
             new Vue({
               el: '#visible',

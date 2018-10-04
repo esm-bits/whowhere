@@ -2,7 +2,7 @@ function doGet() {
   return whowhere.core.index();
 }
 
-function calc() {
+function start() {
   return whowhere.core.start();
 }
 
