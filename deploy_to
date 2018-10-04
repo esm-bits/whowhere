@@ -1,0 +1,33 @@
+#!/bin/sh
+
+usage() {
+  echo 'Usage: deploy_target [production|staging]'
+}
+
+create_sym_link() {
+  echo "Deploy to $1..."
+  ln -sfn .clasp/clasp.json.$1 .clasp.json
+}
+
+deploy() {
+  lein exec view/index.clj >| dist/index.html && lein cljsbuild once main && clasp push
+}
+
+tear_down() {
+  rm -f .clasp.json
+}
+
+if [ $# = 0 ]; then
+  usage
+  exit 1
+fi
+
+if [ $1 = 'production' -o $1 = 'staging' ]; then
+  create_sym_link $1
+else
+  usage
+  exit 1
+fi
+
+deploy
+exit 0
