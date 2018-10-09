@@ -30,4 +30,3 @@ else
 fi
 
 deploy
-exit 0
