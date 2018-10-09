@@ -39,5 +39,6 @@ chmod 744 deploy_to
 or
 
 ```sh
-lein exec view/index.clj >| dist/index.html && lein cljsbuild once main && clasp push
+lein exec view/index.clj && lein cljsbuild once main && clasp push
 ```
+
