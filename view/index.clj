@@ -7,7 +7,7 @@
 (use 'garden.core)
 (use 'clojure.java.io)
 
-(def styles 
+(def index-styles 
   (css
     [:body {
       :font-family "Arial, Verdana, sans-serif"
@@ -86,7 +86,7 @@
        [:script {:defer nil :src "https://use.fontawesome.com/releases/v5.3.1/js/all.js" :integrity "sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" :crossorigin "anonymous"}]
         [:script {:src "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"}]
         [:base {:target "_top"}]]
-        [:style styles]
+        [:style index-styles]
       [:body
         [:div {:id "visible"}
           [:i {:class "loading fa fa-spinner fa-pulse fa-3x fa-fw" "v-bind:class" "{unvisible: active}"}]
@@ -120,6 +120,9 @@
             } 
         "]])))
 
-(with-open [fout (writer  "dist/index.html" :encoding "UTF-8")]
-    (.write fout (str index-html)))
+(def views
+  ["index"])
 
+(doseq [name views]
+  (with-open [fout (writer  (str "dist/" name ".html") :encoding "UTF-8")]
+    (.write fout (str (eval (symbol (str name "-html")))))))
