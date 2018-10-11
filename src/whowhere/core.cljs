@@ -1,7 +1,7 @@
 (ns whowhere.core
   (:require [whowhere.entry-points]))
 
-(defn raw-members []
+(def raw-members
   (->> (.. js/SpreadsheetApp
       getActiveSpreadsheet
       (getSheetByName "members")
@@ -52,7 +52,7 @@
       (map #(apply ->Project %)))))
 
 (def project-list
-  (->> (raw-members)
+  (->> raw-members
     (to-members)
     (projects)))
 
