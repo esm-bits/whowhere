@@ -5,6 +5,7 @@
 (ns whowhere.core)
 (use 'hiccup.core 'hiccup.page)
 (use 'garden.core)
+(use 'clojure.java.io)
 
 (def styles 
   (css
@@ -119,4 +120,6 @@
             } 
         "]])))
 
-(println index-html)
+(with-open [fout (writer  "dist/index.html" :encoding "UTF-8")]
+    (.write fout (str index-html)))
+
