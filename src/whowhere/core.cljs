@@ -66,5 +66,7 @@
 (defn ^:export index []
   (.. js/HtmlService
     (createTemplateFromFile "index")
-    evaluate))
+    evaluate
+    (setTitle (settings "title"))
+    (setFaviconUrl (settings "favicon"))))
 
