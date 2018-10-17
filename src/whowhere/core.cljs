@@ -60,7 +60,7 @@
   (clj->js
     {
       "projects" project-list
-      "settings" (clj->js settings)
+      "settings" settings
     }))
 
 (defn ^:export index []
