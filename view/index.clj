@@ -68,10 +68,25 @@
     [".member:hover .mask" {
 	    :opacity "1"
     }]
-    [".member .caption" {
-	    :font-size "130%"
+    [".member .real-name" {
+	    :font-size "140%"
 	    :text-align "center"
 	    :padding-top "30px"
+	    :color "#fff"
+    }]
+    [".member .email" {
+	    :padding-top "2px"
+	    :text-align "center"
+	    :color "#fff"
+    }]
+    [".member .email .id" {
+	    :font-size "120%"
+	    :text-align "center"
+	    :color "#fff"
+    }]
+    [".member .email .domain" {
+	    :font-size "60%"
+	    :text-align "center"
 	    :color "#fff"
     }]
     [:.loading {
@@ -100,8 +115,11 @@
                     [:p "{{ member['name'] }}"]
                     [:img {"v-bind:src" "member['icon']" :class "icon"}]
                     [:div {:class "mask"}
-                      [:div {:class "caption"}
-                        "{{ member['real-name'] }}"]]
+                      [:div {:class "real-name"}
+                        "{{ member['real-name'] }}"]
+                      [:div {:class "email"}
+                        [:p {:class "id" } "{{ member['email'].replace(/@.*/, '') }}"]
+                        [:p {:class "domain" } "{{ member['email'].replace(/.*@/, '@') }}"]]]
                     [:p "{{ member['location'] }}"]]]]]]]
         [:script "
           google.script.run.withSuccessHandler(initializeVue).start();

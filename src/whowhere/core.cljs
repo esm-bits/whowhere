@@ -22,12 +22,12 @@
     (rest)
     (reduce (fn [accum [key val]] (assoc accum key val)) {})))
 
-(defrecord Member [id, name, real-name, location, projects, icon])
+(defrecord Member [id, name, real-name, email, location, projects, icon])
 (defrecord Project [name, location, members])
 
 (defn to-members [raw-members]
   (->> raw-members
-    (map #(Member. (nth % 0) (nth % 1) (nth % 2) (nth % 3) (js->clj (.split (nth % 4) #",[\s]*")) (nth % 5)))))
+    (map #(Member. (nth % 0) (nth % 1) (nth % 2) (nth % 3) (nth % 4) (js->clj (.split (nth % 5) #",[\s]*")) (nth % 6)))))
 
 (defn project-names [members]
   (->> members
