@@ -29,7 +29,7 @@
       :border-radius "40px"
       :border-width "4px !important"
       :float "left"
-      :height "140px"
+      :min-height "140px"
       :margin "1px 2px"
       :padding "10px 15px"
       :text-align "center"
