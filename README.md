@@ -24,7 +24,7 @@ touch .clasp/clasp.json.staging
 
 ``lein deps``
 
-### Change permission to deploy_to
+### Change permission of deploy_to
 
 ```sh
 chmod 744 deploy_to
@@ -39,6 +39,8 @@ chmod 744 deploy_to
 or
 
 ```sh
+rm -f .clasp.json
+ln -sfn .clasp/clasp.json.production .clasp.json
 lein exec view/index.clj && lein cljsbuild once main && clasp push
 ```
 
