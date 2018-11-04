@@ -68,10 +68,14 @@
     [".member:hover .mask" {
 	    :opacity "1"
     }]
+    [".member .no" {
+	    :text-align "center"
+	    :padding-top "15px"
+	    :color "#fff"
+    }]
     [".member .real-name" {
 	    :font-size "140%"
 	    :text-align "center"
-	    :padding-top "30px"
 	    :color "#fff"
     }]
     [".member .email" {
@@ -115,6 +119,8 @@
                     [:p "{{ member['name'] }}"]
                     [:img {"v-bind:src" "member['icon']" :class "icon"}]
                     [:div {:class "mask"}
+                      [:div {:class "no"}
+                        "{{ member['id'] }}"]
                       [:div {:class "real-name"}
                         "{{ member['real-name'] }}"]
                       [:div {:class "email"}
