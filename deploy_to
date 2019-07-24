@@ -13,10 +13,6 @@ deploy() {
   lein exec view/index.clj && lein cljsbuild once main && clasp push
 }
 
-tear_down() {
-  rm -f .clasp.json
-}
-
 if [ $# = 0 ]; then
   usage
   exit 1
