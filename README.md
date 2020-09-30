@@ -1,6 +1,6 @@
 ## How to use
 
-### Create .clasp.clasp.json.xxxx
+### Create .clasp/clasp.json.xxxx
 
 ```sh
 mkdir .clasp
